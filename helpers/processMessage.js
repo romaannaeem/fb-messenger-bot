@@ -1,7 +1,7 @@
-const API_AI_TOKEN = 'bba14d00a7484bb6b58015f29e86a7da';
+const keys = require('../keys');
+const API_AI_TOKEN = keys.ApiAiToken;
 const apiAiClient = require('apiai')(API_AI_TOKEN);
-const FACEBOOK_ACCESS_TOKEN =
-  'EAAJ2ZC12B79EBAG8lBYLKlZAq4WpqdD4GkjC6Yj9cnKZB2ADhPzFQLVcHzpZC1FZBqjuhY2vmKlXZBQM84SnE91pw1OtMgRcFl5ZB7Erxnmwzw1r9oAj0IDgwHepsImUgwRCsMYjZBZCIJVyZBZANuMR9obbITWZCad9pggdoxgjuZBUxaesakZAxRzd0Q';
+const FACEBOOK_ACCESS_TOKEN = keys.facebookAccessToken;
 
 const request = require('request');
 const sendTextMessage = (senderId, text) => {
@@ -19,7 +19,7 @@ module.exports = event => {
   const senderId = event.sender.id;
   const message = event.message.text;
   const apiaiSession = apiAiClient.textRequest(message, {
-    sessionId: 'crowdbotics_bot'
+    sessionId: keys.sessionId
   });
   apiaiSession.on('response', response => {
     const result = response.result.fulfillment.speech;
